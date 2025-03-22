@@ -1,40 +1,30 @@
-name: Generate Animation
+# GitHub Action for generating a contribution graph with a snake eating your contributions.
+
+name: Generate Snake
 
 on:
-  # 每 24 小时自动运行一次
   schedule:
-    - cron: "0 */24 * * *"
-
-  # 允许手动触发任务
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
-  # 在每次推送到任意分支时运行
-  push:
-    branches:
-      - "**"
-
 jobs:
-  generate:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
-      # Step 1: 生成 GitHub 贡献图的贪吃蛇动画
-      - name: Generate GitHub Contribution Snake Animation
-        uses: Platane/snk/svg-only@v3
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+    
+      - name: Generate Snake
+        uses: Platane/snk@master
+        id: snake-gif
         with:
-          github_user_name: ${{ github.repository_owner }} # 使用仓库所有者的 GitHub 用户名
-          outputs: |
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 使用 GitHub Token 进行身份验证
-
-      # Step 2: 将生成的 SVG 文件推送到 output 分支
-      - name: Push SVG Files to Output Branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+          github_user_name: ${{ github.repository_owner }}
+          gif_out_path: ./assets/github-contribution-grid-snake.gif
+          svg_out_path: ./assets/github-contribution-grid-snake.svg
+      
+      - name: Push to GitHub
+        uses: EndBug/add-and-commit@v7.2.1
         with:
-          target_branch: output # 目标分支
-          build_dir: dist       # 包含生成文件的目录
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 使用 GitHub Token 进行身份验证
+          branch: main
+          message: 'Generate Contribution Snake'
