@@ -1,7 +1,7 @@
 <p align="center">
 <h2 height="200px" align="center">Hey! I am  Bright-Ma <img src="https://cdn.jsdelivr.net/gh/MaleWeb/picture/images/techblog/hi.gif" width="25"></h2>
 
-<img src="https://raw.githubusercontent.com/Bright-Ma/Bright-Ma/output/github-contribution-grid-snake.svg"/>
+ ![](https://raw.githubusercontent.com/Bright-Ma/Bright-Ma/main/assets/github-contribution-grid-snake.svg)
 
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png" alt="Rocket" width="30" height="30" /> Github Stats  ✨
